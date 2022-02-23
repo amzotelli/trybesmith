@@ -8,3 +8,7 @@ export interface UserInterface {
 export interface User extends UserInterface {
   id: number
 }
+
+export interface TokenInterface {
+  token: string
+}
