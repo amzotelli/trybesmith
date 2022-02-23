@@ -8,8 +8,8 @@ const createController = async (req: Request, res: Response) => {
   try {
     const user = await createUser(username, classe, level, password);
     return res.status(201).json(user);
-  } catch (error) {
-    res.status(400).send({ token });
+  } catch (error: unknown) {
+    return res.status(400).send({ error });
   }
 };
 
