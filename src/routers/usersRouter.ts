@@ -1,7 +1,18 @@
-import express from 'express';
+import { Router } from 'express';
+import userController from '../controllers/userController';
 
-const Router = express.Router();
+import verificationsUser from '../middlewares/verificationsUser';
 
-Router.post('/');
+const router = Router();
 
-export default Router;
+router
+  .post(
+    '/',
+    verificationsUser.verifyUsername,
+    verificationsUser.verifyClasse,
+    verificationsUser.verifyLevel,
+    verificationsUser.verifyPassword,
+    userController.createController,
+  );
+
+export default router;

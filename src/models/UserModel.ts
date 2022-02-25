@@ -1,17 +1,16 @@
 import { ResultSetHeader } from 'mysql2';
+import { UserInput, User } from '../interfaces/User';
 import connection from './connection';
-import { UserInterface, User } from './UserInterface';
 
-const createUser = async (user: UserInterface): Promise<UserInterface> => {
+const createUser = async (user: UserInput): Promise<User> => {
   const { username, classe, level, password } = user;
-  const [data] = await connection.execute<ResultSetHeader>(
-    'INSERT INTO users (username, classe, level, password) VALUES (?, ?, ?, ?, ?)',
+  const query = `INSERT INTO Trybesmith.Users (username, classe, level, password) 
+  VALUES (?, ?, ?, ?)`;
+  const [{ insertId: id }] = await connection.execute<ResultSetHeader>(
+    query,
     [username, classe, level, password],
   );
-  const { insertId: id } = data;
-
   const newUser: User = { id, username, classe, level, password };
-
   return newUser;
 };
 

@@ -1,16 +1,10 @@
 import { Request, Response } from 'express';
-import { User } from '../models/UserInterface';
-import { createUser } from '../models/UserModel';
-import authentication from '../middlewares/authMiddleware';
+import userService from '../services/userService';
 
 const createController = async (req: Request, res: Response) => {
-  const { username, classe, level, password } = req.body as User;
-  try {
-    const user = await createUser(username, classe, level, password);
-    return res.status(201).json(user);
-  } catch (error: unknown) {
-    return res.status(400).send({ error });
-  }
+  const { username, classe, level, password } = req.body;
+  const tokenNewUser = await userService.createService({ username, classe, level, password });
+  res.status(201).json({ tokenNewUser });
 };
 
 export default {

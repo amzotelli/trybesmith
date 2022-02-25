@@ -7,7 +7,7 @@ const verifyUsername = (req: Request, res: Response) => {
     return res.status(422).send({ error: 'Username must be a string' });
   }
   if (username.length <= 2) {
-    return res.status(422).send({ error: '"Username" must be longer than 2 characters' });
+    return res.status(422).send({ error: 'Username must be longer than 2 characters' });
   }
 };
 
@@ -18,7 +18,7 @@ const verifyClasse = (req: Request, res: Response) => {
     return res.status(422).send({ error: 'Classe must be a string' });
   }
   if (classe.length <= 2) {
-    return res.status(422).send({ error: '"Classe" must be longer than 2 characters' });
+    return res.status(422).send({ error: 'Classe must be longer than 2 characters' });
   }
 };
 
@@ -36,7 +36,7 @@ const verifyPassword = (req: Request, res: Response) => {
     return res.status(422).send({ error: 'Password must be a string' });
   }
   if (password.length <= 7) {
-    return res.status(422).send({ error: '"Password" must be longer than 7 characters' });
+    return res.status(422).send({ error: 'Password must be longer than 7 characters' });
   }
 };
 

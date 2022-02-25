@@ -1,15 +1,10 @@
-import { UserInterface, TokenInterface } from '../models/UserInterface';
-import User from '../models/UserModel';
-import { createToken } from '../middlewares/authMiddleware';
+import { UserInput } from '../interfaces/User';
+import userModel from '../models/UserModel';
+import authMiddleware from '../middlewares/authMiddleware';
 
-const createService = async (user: UserInterface): Promise<createToken> => {
-  const { username, classe, level, password } = await User.createUser(user);
-  const payload = { id, username };
-  const token = jwt.sign(payload, JWT_SECRET, {
-    algorithm: 'HS256',
-    expiresIn: '1h',
-  });
-  return { token };
+const createService = async (user: UserInput): Promise<string> => {
+  const { id, username } = await userModel.createUser(user);
+  return authMiddleware.createToken({ id, username });
 };
 
 export default {

@@ -1,9 +1,11 @@
-import express from 'express';
+import Express, { json } from 'express';
 import userRouter from './routers/usersRouter';
 
-const app = express();
+const app = Express();
 
-app.use(express.json());
+app.use(json());
+
+app.get('/', (req, res) => res.send('hello world'));
 
 app.use('/users', userRouter);
 
