@@ -1,43 +1,47 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
-const verifyUsername = (req: Request, res: Response) => {
+const verifyUsername = (req: Request, res: Response, next: NextFunction) => {
   const { username } = req.body;
-  if (!username) return res.status(400).send({ error: 'Username is required' });
+  if (!username) return res.status(400).json({ error: 'Username is required' });
   if (typeof (username) !== 'string') {
-    return res.status(422).send({ error: 'Username must be a string' });
+    return res.status(422).json({ error: 'Username must be a string' });
   }
   if (username.length <= 2) {
-    return res.status(422).send({ error: 'Username must be longer than 2 characters' });
+    return res.status(422).json({ error: 'Username must be longer than 2 characters' });
   }
+  next();
 };
 
-const verifyClasse = (req: Request, res: Response) => {
+const verifyClasse = (req: Request, res: Response, next: NextFunction) => {
   const { classe } = req.body;
-  if (!classe) return res.status(400).send({ error: 'Classe is required' });
+  if (!classe) return res.status(400).json({ error: 'Classe is required' });
   if (typeof (classe) !== 'string') {
-    return res.status(422).send({ error: 'Classe must be a string' });
+    return res.status(422).json({ error: 'Classe must be a string' });
   }
   if (classe.length <= 2) {
-    return res.status(422).send({ error: 'Classe must be longer than 2 characters' });
+    return res.status(422).json({ error: 'Classe must be longer than 2 characters' });
   }
+  next();
 };
 
-const verifyLevel = (req: Request, res: Response) => {
+const verifyLevel = (req: Request, res: Response, next: NextFunction) => {
   const { level } = req.body;
-  if (!level) return res.status(400).send({ error: 'Level is required' });
-  if (typeof (level) !== 'number') return res.status(422).send({ error: 'Level must be a number' });
-  if (level < 1) return res.status(422).send({ error: 'Level must be greater than 0' });
+  if (level === undefined) return res.status(400).json({ error: 'Level is required' });
+  if (typeof level !== 'number') return res.status(422).json({ error: 'Level must be a number' });
+  if (level <= 0) return res.status(422).json({ error: 'Level must be greater than 0' });
+  next();
 };
 
-const verifyPassword = (req: Request, res: Response) => {
+const verifyPassword = (req: Request, res: Response, next: NextFunction) => {
   const { password } = req.body;
-  if (!password) return res.status(400).send({ error: 'Password is required' });
+  if (!password) return res.status(400).json({ error: 'Password is required' });
   if (typeof (password) !== 'string') {
-    return res.status(422).send({ error: 'Password must be a string' });
+    return res.status(422).json({ error: 'Password must be a string' });
   }
   if (password.length <= 7) {
-    return res.status(422).send({ error: 'Password must be longer than 7 characters' });
+    return res.status(422).json({ error: 'Password must be longer than 7 characters' });
   }
+  next();
 };
 
 export default {
