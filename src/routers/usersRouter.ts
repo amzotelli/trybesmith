@@ -13,6 +13,7 @@ router
     verificationsUser.verifyLevel,
     verificationsUser.verifyPassword,
     userController.createController,
-  );
+  )
+  .get('/', userController.getAll);
 
 export default router;

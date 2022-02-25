@@ -8,11 +8,8 @@ const router = Router();
 router
   .post(
     '/',
-    verificationsUser.verifyUsername,
-    verificationsUser.verifyClasse,
-    verificationsUser.verifyLevel,
-    verificationsUser.verifyPassword,
-    userController.createController,
+    verificationsUser.verifyLogin,
+    userController.login,
   );
 
 export default router;
