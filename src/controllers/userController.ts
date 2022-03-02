@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import authMiddleware from '../middlewares/authMiddleware';
 import userService from '../services/userService';
 
-const createController = async (req: Request, res: Response) => {
+const create = async (req: Request, res: Response) => {
   const { username, classe, level, password } = req.body;
-  const token = await userService.createService({ username, classe, level, password });
+  const token = await userService.create({ username, classe, level, password });
   res.status(201).json({ token });
 };
 
@@ -26,7 +26,7 @@ const getAll = async (req: Request, res: Response) => {
 };
 
 export default {
-  createController,
+  create,
   login,
   getAll,
 };

@@ -2,7 +2,7 @@ import { ResultSetHeader } from 'mysql2';
 import { UserInput, User } from '../interfaces/User';
 import connection from './connection';
 
-const createUser = async (user: UserInput): Promise<User> => {
+const create = async (user: UserInput): Promise<User> => {
   const { username, classe, level, password } = user;
   const query = `INSERT INTO Trybesmith.Users (username, classe, level, password) 
   VALUES (?, ?, ?, ?)`;
@@ -29,7 +29,7 @@ const getByEmail = async (email: string): Promise<User> => {
 };
 
 export default {
-  createUser,
+  create,
   getAll,
   getByEmail,
 };

@@ -12,7 +12,7 @@ router
     verificationsUser.verifyClasse,
     verificationsUser.verifyLevel,
     verificationsUser.verifyPassword,
-    userController.createController,
+    userController.create,
   )
   .get('/', userController.getAll);
 

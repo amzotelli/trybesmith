@@ -2,8 +2,8 @@ import { UserInput } from '../interfaces/User';
 import userModel from '../models/UserModel';
 import authMiddleware from '../middlewares/authMiddleware';
 
-const createService = async (user: UserInput): Promise<string> => {
-  const { id, username } = await userModel.createUser(user);
+const create = async (user: UserInput): Promise<string> => {
+  const { id, username } = await userModel.create(user);
   return authMiddleware.createToken({ id, username });
 };
 
@@ -23,7 +23,7 @@ const getByEmail = async (email: string): Promise<UserInput> => {
 };
 
 export default {
-  createService,
+  create,
   login,
   getAll,
   getByEmail,
