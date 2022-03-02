@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import userController from '../controllers/userController';
+import productController from '../controllers/productController';
 
 import verificationsUser from '../middlewares/verificationsUser';
+import verificationsProduct from '../middlewares/verificationsProduct';
 
 const router = Router();
 
@@ -9,7 +10,9 @@ router
   .post(
     '/',
     verificationsUser.verifyLogin,
-    userController.login,
+    verificationsProduct.verifyName,
+    verificationsProduct.verifyAmount,
+    productController.create,
   );
 
 export default router;

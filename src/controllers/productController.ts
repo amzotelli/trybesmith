@@ -1,3 +1,12 @@
 import { Request, Response } from 'express';
-import authMiddleware from '../middlewares/authMiddleware';
-import productsService from '../services/productsService';
+import productService from '../services/productService';
+
+const create = async (req: Request, res: Response) => {
+  const { name, amount } = req.body;
+  const newProduct = await productService.create({ name, amount });
+  res.status(201).json(newProduct);
+};
+
+export default {
+  create,
+};
