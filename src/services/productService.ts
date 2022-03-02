@@ -6,6 +6,9 @@ const create = async (product: ProductInput): Promise<Product> => {
   return { id, name, amount };
 };
 
+const getAll = async (): Promise<Product[]> => productsModel.getAll(); 
+
 export default {
   create,
+  getAll,
 };

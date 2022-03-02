@@ -14,6 +14,14 @@ const createProduct = async (product: ProductInput): Promise<Product> => {
   return newProduct;
 };
 
+const getAll = async (): Promise<Product[]> => {
+  const orderId = 0;
+  const [rows] = await connection.execute('SELECT * FROM Trybesmith.Products');
+  const products = rows as Product[];
+  return products.map(({ id, name, amount }) => ({ id, name, amount, orderId }));
+};
+  
 export default {
   createProduct,
+  getAll,
 };
