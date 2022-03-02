@@ -17,8 +17,14 @@ const getAll = async (username: string): Promise<UserInput> => {
   return user;
 };
 
+const getByEmail = async (email: string): Promise<UserInput> => {
+  const user = await userModel.getByEmail(email);
+  return user;
+};
+
 export default {
   createService,
   login,
   getAll,
+  getByEmail,
 };

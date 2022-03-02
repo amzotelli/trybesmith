@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import authMiddleware from './authMiddleware';
 
 const verifyName = (req: Request, res: Response, next: NextFunction) => {
   const { name } = req.body;
@@ -24,7 +25,18 @@ const verifyAmount = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
+const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization;
+  if (!token) return res.status(401).json({ message: 'Token not found' });
+  try {
+    authMiddleware.authentication(token);
+  } catch (e) {
+    return res.status(401).json({ message: 'Expired or invalid token' });
+  }
+  next();
+};
 export default {
   verifyName,
   verifyAmount,
+  verifyToken,
 };

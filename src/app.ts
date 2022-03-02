@@ -1,7 +1,7 @@
 import Express, { json } from 'express';
-import userRouter from './routers/usersRouter';
+import userRouter from './routers/userRouter';
 import loginRouter from './routers/loginRouter';
-import productsRouter from './routers/productsRouter';
+import productsRouter from './routers/productRouter';
 
 const app = Express();
 

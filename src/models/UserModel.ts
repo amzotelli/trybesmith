@@ -21,7 +21,15 @@ const getAll = async (username: string): Promise<User> => {
   return user;
 };
 
+const getByEmail = async (email: string): Promise<User> => {
+  const query = 'SELECT * FROM Trybesmith.Users WHERE email = ?';
+  const [rows] = await connection.execute(query, [email]);
+  const [user] = rows as User[];
+  return user;
+};
+
 export default {
   createUser,
   getAll,
+  getByEmail,
 };
