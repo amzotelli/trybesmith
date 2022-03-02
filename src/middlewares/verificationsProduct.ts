@@ -20,18 +20,18 @@ const verifyAmount = (req: Request, res: Response, next: NextFunction) => {
     return res.status(422).json({ error: 'Amount must be a string' });
   }
   if (amount.length <= 2) {
-    return res.status(422).json({ error: 'Name must be longer than 2 characters' });
+    return res.status(422).json({ error: 'Amount must be longer than 2 characters' });
   }
   next();
 };
 
 const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization;
-  if (!token) return res.status(401).json({ message: 'Token not found' });
+  if (!token) return res.status(401).json({ error: 'Token not found' });
   try {
     authMiddleware.authentication(token);
   } catch (e) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    return res.status(401).json({ error: 'Invalid token' });
   }
   next();
 };

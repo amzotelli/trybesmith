@@ -9,8 +9,8 @@ router
   .post(
     '/',
     verificationsProduct.verifyToken,
-    verificationsProduct.verifyName,
     verificationsProduct.verifyAmount,
+    verificationsProduct.verifyName,
     productController.create,
   );
 
