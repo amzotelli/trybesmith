@@ -12,6 +12,7 @@ router
     verificationsProduct.verifyAmount,
     verificationsProduct.verifyName,
     productController.create,
-  );
+  )
+  .get('/', verificationsProduct.verifyToken, productController.getAll);
 
 export default router;
